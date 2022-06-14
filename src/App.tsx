@@ -1,26 +1,26 @@
 import { startTransition, Suspense, useState } from 'react'
-import { Sleep1s } from './component/Sleep1s'
 
 import './App.css'
+import { ShowData } from './component/ShowData';
 
 function App() {
-  const [sleepIsShown, setSleepIsShown] = useState(false);
+  const [counter, setCounter] = useState(0);
   return (
     <div className="text-center">
       <h1 className="text-2xl">React App!</h1>
       <Suspense fallback={<p>Loading...</p>}>
-        {sleepIsShown ? <Sleep1s /> : null}
+        <ShowData dataKey={counter} />
       </Suspense>
       <p>
         <button
           className="border p-1"
           onClick={() => {
             startTransition(() => {
-              setSleepIsShown(true);
-            });
+              setCounter(counter + 1);
+            })
           }}
         >
-          Show Sleep1s
+          Counter is {counter}
         </button>
       </p>
     </div>

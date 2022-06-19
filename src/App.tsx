@@ -2,12 +2,15 @@ import { startTransition, Suspense, useState } from 'react'
 
 import './App.css'
 import { ShowData } from './component/ShowData';
+import { useTime } from './hooks/useTime';
 
 function App() {
   const [counter, setCounter] = useState(0);
+  const time = useTime();
   return (
     <div className="text-center">
       <h1 className="text-2xl">React App!</h1>
+      <p className="tabular-nums">🕒 {time}</p>
       <Suspense fallback={<p>Loading...</p>}>
         <ShowData dataKey={counter} />
       </Suspense>
@@ -16,7 +19,8 @@ function App() {
           className="border p-1"
           onClick={() => {
             startTransition(() => {
-              setCounter(counter + 1);
+              setCounter((c) => c + 1);
+              // setCounter(counter + 1);
             })
           }}
         >

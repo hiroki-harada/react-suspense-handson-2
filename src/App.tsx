@@ -1,4 +1,4 @@
-import { startTransition, Suspense, useState } from 'react'
+import { Suspense, useState, useTransition } from 'react'
 
 import './App.css'
 import { ShowData } from './component/ShowData';
@@ -7,10 +7,15 @@ import { useTime } from './hooks/useTime';
 function App() {
   const [counter, setCounter] = useState(0);
   const time = useTime();
+  const [isPending, startTransition] = useTransition();
+  const [isPending2, startTransition2] = useTransition();
+
   return (
     <div className="text-center">
       <h1 className="text-2xl">React App!</h1>
-      <p className="tabular-nums">🕒 {time}</p>
+      <p className={"tabular-nums" + (isPending ? " text-blue-700" : "")}>
+        🕒 {time}
+      </p>
       <Suspense fallback={<p>Loading...</p>}>
         <ShowData dataKey={counter} />
       </Suspense>

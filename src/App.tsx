@@ -20,7 +20,6 @@ function App() {
           onClick={() => {
             startTransition(() => {
               setCounter((c) => c + 1);
-              // setCounter(counter + 1);
             })
           }}
         >
